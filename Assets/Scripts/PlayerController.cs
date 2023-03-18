@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float vSpeed {get; set;} = 10;
-    public float hSpeed {get; set;} = 10;
+    public float vSpeed {get; set;} = 12;
+    public float hSpeed {get; set;} = 12;
     Rigidbody rb;
 
     // Start is called before the first frame update
