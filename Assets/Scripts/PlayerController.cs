@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] BallMaterialType materialType;
 
+    [SerializeField] AudioSource bonkRock;
+    [SerializeField] AudioSource bonkWood;
+    [SerializeField] AudioSource bonkSteel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +65,25 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log(collision.gameObject);
 
+        var impulse = Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity);
+
         collidingObjects.Add(collision.gameObject);
+
+        if (collision.gameObject.tag == "Rock")
+        {
+            bonkRock.volume = Mathf.Min(1, impulse * impulse / 25);
+            bonkRock.Play();
+        }
+        else if (collision.gameObject.tag == "Wood")
+        {
+            bonkWood.volume = Mathf.Min(1, impulse * impulse / 25);
+            bonkWood.Play();
+        }
+        else if (collision.gameObject.tag == "Steel")
+        {
+            bonkSteel.volume = Mathf.Min(1, impulse * impulse / 25);
+            bonkSteel.Play();
+        }
 
         //Check for a match with the specified name on any GameObject that collides with your GameObject
         if (collision.gameObject.name == "MyGameObjectName")

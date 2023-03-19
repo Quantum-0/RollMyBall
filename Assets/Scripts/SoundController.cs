@@ -26,7 +26,7 @@ public class SoundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(pc.collidingObjects.Count);
+        // Debug.Log(pc.collidingObjects.Count);
 
         rollingWood.volume = 0;
         rollingSteel.volume = 0;
