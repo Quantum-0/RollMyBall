@@ -17,7 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float MaxAngularVelocity = 15f;
     [SerializeField] GameObject paperForm;
 
+    [SerializeField] public Material rockMat;
+    [SerializeField] public Material woodMat;
+    [SerializeField] public Material paperMat;
+
     Rigidbody rb;
+
+    public List<GameObject> collidingObjects;
 
     [SerializeField] BallMaterialType materialType;
 
@@ -51,9 +57,39 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject);
+
+        collidingObjects.Add(collision.gameObject);
+
+        //Check for a match with the specified name on any GameObject that collides with your GameObject
+        if (collision.gameObject.name == "MyGameObjectName")
+        {
+            //If the GameObject's name matches the one you suggest, output this message in the console
+            Debug.Log("Do something here");
+        }
+
+        //Check for a match with the specific tag on any GameObject that collides with your GameObject
+        if (collision.gameObject.tag == "MyGameObjectTag")
+        {
+            //If the GameObject has the same tag as specified, output this message in the console
+            Debug.Log("Do something else here");
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        Debug.Log(collision.gameObject);
+        collidingObjects.Remove(collision.gameObject);
+    }
+
     public void ApplyMaterial()
     {
         Debug.Log("Switch material type to " + materialType.ToString());
+        transform.Translate(Vector3.up, Space.World);
+        collidingObjects.Clear();
+
         switch (materialType)
         {
             case BallMaterialType.Rock:
@@ -61,25 +97,27 @@ public class PlayerController : MonoBehaviour
                 Speed = 4.5f;
                 AirFriction = 1.3f;
                 paperForm.SetActive(false);
+                GetComponent<Renderer>().material = rockMat;
                 return;
             case BallMaterialType.Wood:
                 rb.mass = 1.55f;
                 Speed = 4.5f;
                 AirFriction = 1.3f;
                 paperForm.SetActive(false);
+                GetComponent<Renderer>().material = woodMat;
                 return;
             case BallMaterialType.Paper:
                 rb.mass = 0.3f;
                 Speed = 2f;
                 AirFriction = 0.2f;
                 paperForm.SetActive(true);
+                GetComponent<Renderer>().material = paperMat;
                 return;
             default:
                 break;
         }
     }
 }
-
 
 public static class ExtensionMethods
 {
