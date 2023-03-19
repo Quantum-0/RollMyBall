@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float vSpeed {get; set;} = 12;
-    public float hSpeed {get; set;} = 12;
+    [SerializeField] float Speed = 3;
+    [SerializeField] float AirFriction = 1.5f;
+
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -17,11 +18,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float h = hSpeed * Input.GetAxis("Horizontal");
-        float v = vSpeed * Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-        rb.AddForce(new Vector3(h, 0, v));
+        rb.AddForce(new Vector3(h,0,v).normalized * Speed);
 
-        rb.AddForce(-rb.velocity.normalized*1.5f);      
+        var flattenedVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        rb.AddForce(-flattenedVelocity*AirFriction);      
     }
 }
