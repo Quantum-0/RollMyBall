@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float Speed = 4.5f;
     [SerializeField] float AirFriction = 1.3f;
-    [SerializeField] float MaxAngularVelocity = 15f;
+    [SerializeField] float MaxAngularVelocity = 30f;
     [SerializeField] GameObject paperForm;
 
     [SerializeField] public Material rockMat;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     public List<GameObject> collidingObjects;
+    public float Direction;
 
     [SerializeField] BallMaterialType materialType;
 
@@ -42,10 +43,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
 
-        rb.AddTorque(new Vector3(v, 0, -h).normalized * Speed);
+        float hRaw = Input.GetAxis("Horizontal");
+        float vRaw = Input.GetAxis("Vertical");
+        float v = Mathf.Cos(Direction) * vRaw - Mathf.Sin(Direction) * hRaw;
+        float h = Mathf.Sin(Direction) * vRaw + Mathf.Cos(Direction) * hRaw;
+
+        // rb.AddTorque(new Vector3(v, 0, -h).normalized * Speed);
+        if (!Input.GetKey(KeyCode.LeftShift))
+            rb.AddForce(new Vector3(h, 0, v).normalized * Speed * 2);
 
         var flattenedVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
@@ -115,22 +121,22 @@ public class PlayerController : MonoBehaviour
         switch (materialType)
         {
             case BallMaterialType.Rock:
-                rb.mass = 2.75f;
+                rb.mass = 3f; // 2.75f;
                 Speed = 4.5f;
                 AirFriction = 1.3f;
                 paperForm.SetActive(false);
                 GetComponent<Renderer>().material = rockMat;
                 return;
             case BallMaterialType.Wood:
-                rb.mass = 1.55f;
+                rb.mass = 1.7f; // 1.55f
                 Speed = 4.5f;
                 AirFriction = 1.3f;
                 paperForm.SetActive(false);
                 GetComponent<Renderer>().material = woodMat;
                 return;
             case BallMaterialType.Paper:
-                rb.mass = 0.3f;
-                Speed = 2f;
+                rb.mass = 0.05f; // 0.3f;
+                Speed = 0.5f; // 2f;
                 AirFriction = 0.2f;
                 paperForm.SetActive(true);
                 GetComponent<Renderer>().material = paperMat;
