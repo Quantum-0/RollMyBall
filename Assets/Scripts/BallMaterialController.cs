@@ -64,7 +64,7 @@ public class BallMaterialController : MonoBehaviour
                     GetComponent<SphereCollider>().enabled = true;
                     break;
                 case BallMaterialType.Paper:
-                    rb.mass = 0.05f; // 0.3f;
+                    rb.mass = 0.04f; // 0.3f;
                     GetComponent<BallPhysics>().AirFriction = 0.25f;
                     paperForm.SetActive(true);
                     // GetComponent<Renderer>().material = materialPaper;
