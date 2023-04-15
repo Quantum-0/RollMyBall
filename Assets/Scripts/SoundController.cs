@@ -6,6 +6,7 @@ public class SoundController : MonoBehaviour
 {
     [SerializeField] public AudioSource rollingWood;
     [SerializeField] public AudioSource rollingSteel;
+    [SerializeField] public AudioSource rollingPaper;
 
     Rigidbody rb;
     public List<GameObject> collidingObjects;
@@ -15,6 +16,7 @@ public class SoundController : MonoBehaviour
     [SerializeField] AudioSource bonkRock;
     [SerializeField] AudioSource bonkWood;
     [SerializeField] AudioSource bonkSteel;
+    [SerializeField] AudioSource bonkPaper;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class SoundController : MonoBehaviour
         rollingWood.Play();
         rollingSteel.loop = true;
         rollingSteel.Play();
+        rollingPaper.loop = true;
+        rollingPaper.Play();
         GetComponent<BallMaterialController>().materialWasChanged += (s, e) => { collidingObjects.Clear(); triggerCollidingObjects.Clear(); };
     }
 
@@ -32,16 +36,21 @@ public class SoundController : MonoBehaviour
     {
         rollingWood.volume = 0;
         rollingSteel.volume = 0;
+        rollingPaper.volume = 0;
+
+        var ballMaterial = GetComponent<BallMaterialController>().materialType;
 
         // TODO: Подумать как сделать адекватнее
-        var collidingObjectsCollection = GetComponent<BallMaterialController>().materialType == BallMaterialType.Paper ? triggerCollidingObjects : collidingObjects;
+        var collidingObjectsCollection = ballMaterial == BallMaterialType.Paper ? triggerCollidingObjects : collidingObjects;
 
         if (collidingObjectsCollection.Count > 0)
         { 
             var currentSurface = collidingObjectsCollection[0].tag;
             AudioSource rollingSound;
 
-            if (currentSurface == "Wood")
+            if (ballMaterial == BallMaterialType.Paper)
+                rollingSound = rollingPaper;
+            else if (currentSurface == "Wood")
                 rollingSound = rollingWood;
             else if (currentSurface == "Steel")
                 rollingSound = rollingSteel;
@@ -74,7 +83,9 @@ public class SoundController : MonoBehaviour
 
         // Take first surface (it will be main/ground, probably)
         AudioSource bonkSound;
-        if (collision.gameObject.tag == "Rock")
+        if (GetComponent<BallMaterialController>().materialType == BallMaterialType.Paper)
+            bonkSound = bonkPaper;
+        else if (collision.gameObject.tag == "Rock")
             bonkSound = bonkRock;
         else if (collision.gameObject.tag == "Wood")
             bonkSound = bonkWood;
