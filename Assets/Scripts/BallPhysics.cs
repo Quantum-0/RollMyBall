@@ -21,5 +21,10 @@ public class BallPhysics : MonoBehaviour
     {
         var flattenedVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(-flattenedVelocity * AirFriction);
+        // TODO: As idea for the paper!!
+        // if (Random.value < 0.1f)
+        // {
+        //     rb.AddForce(new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f)*rb.velocity.magnitude);
+        // }
     }
 }

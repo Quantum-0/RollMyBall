@@ -17,9 +17,8 @@ public class PlayerController : MonoBehaviour
     // Change acceleration depends on material
     private float ControllingForceFromMaterialType(BallMaterialType materialType)
     {
-        Debug.LogError(materialType);
         if (materialType == BallMaterialType.Paper)
-            return 0.5f;
+            return 0.67f;
         return 4.5f;
     }
 
