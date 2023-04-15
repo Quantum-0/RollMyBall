@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float ControllingForce = 4.5f;
     public float Direction;
     public float EnergyBall = 10.0f;
-    public GameObject Ball;
 
     Rigidbody rb;
 
