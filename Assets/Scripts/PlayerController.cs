@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float ControllingForce = 4.5f;
     public float Direction;
+    public float EnergyBall = 10.0f;
 
     Rigidbody rb;
 
@@ -35,6 +36,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
             return;
 
+        // Press LeftControl for acceleration ball speed
+        if (Input.GetKey(KeyCode.LeftControl) & ControllingForce < 15.0f & EnergyBall > 0){
+                ControllingForce += 0.5f;
+                EnergyBall -= 0.1f;
+        }
+        else
+        {
+            if (ControllingForce > 4.5f){
+                ControllingForce -= 2.0f;
+            }
+        }
+
+        // Limit energy for acceleration ball speed
+        if (ControllingForce < 4.7f & EnergyBall <= 10.0f){
+            EnergyBall += 0.1f;
+        }
+
+        // UnityEngine.Debug.Log(EnergyBall);
         // Get original axis values
         float hRaw = Input.GetAxis("Horizontal");
         float vRaw = Input.GetAxis("Vertical");
