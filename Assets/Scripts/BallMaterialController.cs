@@ -82,7 +82,10 @@ public class BallMaterialController : MonoBehaviour
 
     public event EventHandler<MaterialWasChangedEventArgs> materialWasChanged;
 
-    void Start() => rb = GetComponent<Rigidbody>();
+    void Start() {
+        rb = GetComponent<Rigidbody>();
+        materialType = BallMaterialType.Wood;
+    }
 
     // TODO: Remove later! Added for debug
     void Update()
