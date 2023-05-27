@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LivesDeathAndCheckpointController : MonoBehaviour
 {
     public GameObject LastCheckpoint;
+    public int Lives = 3;  // TODO: Где-то их отрисовывать
 
     // Use this for initialization
     void Start()
@@ -12,7 +14,7 @@ public class LivesDeathAndCheckpointController : MonoBehaviour
         PutOnCheckpoint();
     }
 
-    int CheckpointsLeft => Checkpoint.CheckpointsLeft.Count;
+    public int CheckpointsLeft => Checkpoint.CheckpointsLeft.Count;
 
     void PutOnCheckpoint()
     {
@@ -25,8 +27,11 @@ public class LivesDeathAndCheckpointController : MonoBehaviour
     void Death()
     {
         // TODO: Какие-нибудь красивые эффектики
-        // TODO: -1 жизнь
-        PutOnCheckpoint();
+        Lives -= 1;
+        if (Lives > 0)
+            PutOnCheckpoint();
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);            
     }
 
     // Update is called once per frame
