@@ -354,6 +354,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4431332732869185886, guid: ccb3c5848ce924158a110a2378181de0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431332732869185886, guid: ccb3c5848ce924158a110a2378181de0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8887699733179238170, guid: ccb3c5848ce924158a110a2378181de0, type: 3}
       propertyPath: m_Name
       value: PlayerBall
