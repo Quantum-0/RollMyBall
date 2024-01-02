@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float ControllingForce = 4.5f;
     public float Direction;
+    public JoystickController joystick = null;
 
     Rigidbody rb;
 
@@ -38,8 +39,17 @@ public class PlayerController : MonoBehaviour
             return;
 
         // Get original axis values
-        float hRaw = Input.GetAxis("Horizontal");
-        float vRaw = Input.GetAxis("Vertical");
+        float hRaw, vRaw;
+        if (joystick)
+        {
+            hRaw = joystick.InputHorizontal();
+            vRaw = joystick.InputVertical();
+        }
+        else
+        {
+            hRaw = Input.GetAxis("Horizontal");
+            vRaw = Input.GetAxis("Vertical");
+        }
 
         // Converts them applying camera rotation
         float v = Mathf.Cos(Direction) * vRaw - Mathf.Sin(Direction) * hRaw;
