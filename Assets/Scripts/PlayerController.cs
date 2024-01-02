@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     {
         if (materialType == BallMaterialType.Paper)
             return 0.67f;
+        if (materialType == BallMaterialType.Rock)
+            return 10f;
         return 4.5f;
     }
 

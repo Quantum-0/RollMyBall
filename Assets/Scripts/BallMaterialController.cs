@@ -48,7 +48,7 @@ public class BallMaterialController : MonoBehaviour
             switch (value)
             {
                 case BallMaterialType.Rock:
-                    rb.mass = 3f; // 2.75f;
+                    rb.mass = 6.667f; // 3, 2.75f;
                     GetComponent<BallPhysics>().AirFriction = 1.3f;
                     paperForm.SetActive(false);
                     GetComponent<Renderer>().material = materialRock;
