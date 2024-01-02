@@ -13,7 +13,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
     // Start is called before the first frame update
     void Start()
     {
-        if (!(Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform))
+        if (!Application.isMobilePlatform)
         {
             this.gameObject.SetActive(false);
             return;
