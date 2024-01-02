@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4583314464658800305}
   - component: {fileID: 4583314464658800304}
   m_Layer: 0
-  m_Name: Left Metal Rod
+  m_Name: Metal Rod
   m_TagString: Steel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
