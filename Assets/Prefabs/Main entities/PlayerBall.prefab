@@ -3242,6 +3242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ControllingForce: 4.5
   Direction: 0
+  joystick: {fileID: 0}
 --- !u!114 &4431332732869185874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3284,6 +3285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a425b1b763193478ab656d193124fe06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollingRock: {fileID: 4431332731835747827}
   rollingWood: {fileID: 4431332731835747827}
   rollingSteel: {fileID: 4431332732640601148}
   rollingPaper: {fileID: 4431332731564463951}

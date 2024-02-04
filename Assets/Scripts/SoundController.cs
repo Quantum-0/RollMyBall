@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
+    [SerializeField] public AudioSource rollingRock;
     [SerializeField] public AudioSource rollingWood;
     [SerializeField] public AudioSource rollingSteel;
     [SerializeField] public AudioSource rollingPaper;
@@ -22,6 +23,8 @@ public class SoundController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rollingRock.loop = true;
+        rollingRock.Play();
         rollingWood.loop = true;
         rollingWood.Play();
         rollingSteel.loop = true;
@@ -34,6 +37,7 @@ public class SoundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rollingRock.volume = 0;
         rollingWood.volume = 0;
         rollingSteel.volume = 0;
         rollingPaper.volume = 0;
@@ -54,6 +58,8 @@ public class SoundController : MonoBehaviour
                 rollingSound = rollingWood;
             else if (currentSurface == "Steel")
                 rollingSound = rollingSteel;
+            else if (currentSurface == "Rock")
+                rollingSound = rollingRock;
             else
                 return;
 

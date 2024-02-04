@@ -88,11 +88,11 @@ public class BallMaterialController : MonoBehaviour
     }
 
     // TODO: Remove later! Added for debug
-    void Update()
+    /* void Update()
     {
         if (Input.GetKeyDown("space"))
             materialType = materialType.Next();
-    }
+    } */
 }
 
 /// <summary>
